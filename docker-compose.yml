@@ -1,0 +1,18 @@
+# docker-compose.yml: team settings layered onto the Kortix self-host stack.
+#
+# Kortix runs as one Docker Compose stack: the frontend, the API, the LLM
+# gateway, and the Supabase distribution. `kortix self-host init` writes the
+# canonical stack file; this file layers your team's settings on top of it.
+#
+#   kortix self-host start
+#   docker compose \
+#     -f ~/.config/kortix/self-host/<instance>/docker-compose.yml \
+#     -f ./docker-compose.yml up -d
+
+services:
+  api:
+    environment:
+      # 640 MiB is the default per API container. Raise it on a 16 GiB host
+      # when API traffic reaches the default limit.
+      KORTIX_API_MEMORY_LIMIT: 1024m
+    restart: unless-stopped
