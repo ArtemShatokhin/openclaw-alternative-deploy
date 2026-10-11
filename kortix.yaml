@@ -1,0 +1,34 @@
+# kortix.yaml: the Kortix layer of this project.
+#
+# Declares the machine image, the connectors and the triggers, and secret
+# names and grants. Secret values never appear in this file or in the repo.
+# `kortix init` scaffolds this file; `kortix ship` pushes it live.
+
+version: 2
+
+# The agents this project runs. Each entry is governance for one file under
+# agents/. The behavior lives in the markdown file; this block says what the
+# agent may reach. The scoping field is permission, not tools.
+agents:
+  researcher:
+    file: agents/researcher.md
+    connectors: all
+
+# The tools the agents reach. Wire these up once, then scope them per agent.
+# Connector credentials are brokered server-side and never enter the machine.
+connectors:
+  - slack
+  - gmail
+
+# Work that starts with nobody present. Exactly two types: cron and webhook.
+triggers:
+  - slug: weekly-digest
+    type: cron
+    cron: "0 9 * * 1"
+    session_mode: fresh
+    prompt: Compile last week's project activity into a digest and open a change request.
+
+# The machine image sessions boot. Uncomment and set your own, or keep the
+# default written by `kortix init`.
+# machine:
+#   image: default
