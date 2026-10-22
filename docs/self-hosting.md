@@ -26,7 +26,7 @@ kortix self-host configure
 
 ## What runs where
 
-Kortix runs as one Docker Compose stack: the frontend, the API, the LLM gateway, and the Supabase distribution. Agent sessions run on a separate sandbox provider, not on this stack, so compute scales off the box. The box must stay reachable so the sandbox can call back to the API. The default provider is Daytona; Platinum and E2B are also supported.
+Kortix runs as one Docker Compose stack: the frontend, the API, the LLM gateway, and the Supabase distribution. Agent sessions run on a separate sandbox provider, not on this stack, so compute scales off the box. The box must stay reachable so the sandbox can call back to the API. Platinum is the default provider; Daytona remains available as a legacy fallback.
 
 ## Updates and scale
 
